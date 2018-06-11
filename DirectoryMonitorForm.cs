@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using System.IO;
-using Tulpep.NotificationWindow;
+using FileSystemWatcherComponent.Tulpep.NotificationWindow;
 
 namespace DirectoryMonitorWinForm
 {
@@ -10,7 +10,7 @@ namespace DirectoryMonitorWinForm
     /// </summary>
     public class DirectoryMonitorForm : System.Windows.Forms.Form
 	{
-
+ 
 		private static string Path="";
 		private static string Filter="";
 		private static bool IncludeSubs=false;
@@ -225,21 +225,26 @@ namespace DirectoryMonitorWinForm
 			//display a message box for the appropriate changetype.
 			if (ChangeType=="Created")
 			{
-                MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Created" );
+                PopupNotifier popup = new PopupNotifier();
+                popup.TitleText = "There are new files";
+                popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt")+ " "+ e.Name + " Created";
+                popup.Popup();
+                //MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Created" );
 			}
-			else if(ChangeType=="Deleted")
-			{
-                MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Deleted");
-            }
-			else if(ChangeType=="Changed")
-			{
-                MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Changed" + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"));
-            }
+			//else if(ChangeType=="Deleted")
+			//{
+             //   MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Deleted");
+            //}
+			//else if(ChangeType=="Changed")
+			//{                
+            //    MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Changed" + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"));
+            //}
 		
 		}
 
 		private void ButtonStart_Click(object sender, System.EventArgs e)
 		{
+            
             if (String.IsNullOrEmpty(directoryToMonitor.Text))
             {
                 // return required field message 

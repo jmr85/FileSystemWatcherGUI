@@ -41,27 +41,38 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Tulpep.NotificationWindow, Version=1.1.25.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Tulpep.NotificationWindow.1.1.25\lib\net40\Tulpep.NotificationWindow.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
     <Content Include="Misc\NoFiles.txt" />
+    <Content Include="Tulpep.NotificationWindow\Grip.png" />
+    <Content Include="Tulpep.NotificationWindow\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DirectoryMonitorForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tulpep.NotificationWindow\PopupNotifier.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tulpep.NotificationWindow\PopupNotifierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tulpep.NotificationWindow\Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DirectoryMonitorForm.resx">
       <DependentUpon>DirectoryMonitorForm.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <EmbeddedResource Include="Tulpep.NotificationWindow\Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
