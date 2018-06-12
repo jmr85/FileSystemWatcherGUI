@@ -12,7 +12,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace FileSystemWatcherComponent.Tulpep.NotificationWindow
+namespace FileSystemWatcherComponent.NotificationWindow
 {
     /// <summary>
     /// Non-visual component to show a notification window in the right lower
@@ -259,16 +259,16 @@ namespace FileSystemWatcherComponent.Tulpep.NotificationWindow
             TitleFont = SystemFonts.CaptionFont;
             ShowGrip = true;
             Scroll = true;
-            TitlePadding = new Padding(0);
-            ContentPadding = new Padding(0);
+            TitlePadding = new Padding(0);// estaba en 0
+            ContentPadding = new Padding(4);// estaba en 0
             ImagePadding = new Padding(0);
-            HeaderHeight = 9;
+            HeaderHeight = 10;
             ShowCloseButton = true;
             ShowOptionsButton = false;
-            Delay = 4000;
+            Delay = 10000000;//estaba en 3000, para editar la duracion del popup
             AnimationInterval = 10;
-            AnimationDuration = 1000;
-            Size = new Size(400, 100);
+            AnimationDuration = 2000;// estaba en 1000 
+            Size = new Size(400, 100);//estaba en 400, 200
 
             frmPopup = new PopupNotifierForm(this);
             frmPopup.TopMost = true;
@@ -344,6 +344,7 @@ namespace FileSystemWatcherComponent.Tulpep.NotificationWindow
                         opacityStart = frmPopup.Opacity;
                         opacityStop = 1;
                         isAppearing = true;
+                        //realAnimationDuration = Math.Max(20, 1);
                         realAnimationDuration = Math.Max((int)sw.ElapsedMilliseconds, 1);
                         sw.Restart();
                         System.Diagnostics.Debug.WriteLine("Animation direction changed.");

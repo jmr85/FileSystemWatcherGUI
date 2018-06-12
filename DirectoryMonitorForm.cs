@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using System.IO;
-using FileSystemWatcherComponent.Tulpep.NotificationWindow;
+using FileSystemWatcherComponent.NotificationWindow;
 
 namespace DirectoryMonitorWinForm
 {
@@ -227,8 +227,9 @@ namespace DirectoryMonitorWinForm
 			{
                 PopupNotifier popup = new PopupNotifier();
                 popup.TitleText = "There are new files";
-                popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt")+ " "+ e.Name + " Created";
+                popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt")+ " "+ e.Name + " Created";
                 popup.Popup();
+                   
                 //MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Created" );
 			}
 			//else if(ChangeType=="Deleted")

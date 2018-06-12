@@ -45,21 +45,21 @@
   <ItemGroup>
     <Content Include="App.ico" />
     <Content Include="Misc\NoFiles.txt" />
-    <Content Include="Tulpep.NotificationWindow\Grip.png" />
-    <Content Include="Tulpep.NotificationWindow\Icon.ico" />
+    <Content Include="NotificationWindow\Grip.png" />
+    <Content Include="NotificationWindow\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DirectoryMonitorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tulpep.NotificationWindow\PopupNotifier.cs">
+    <Compile Include="NotificationWindow\PopupNotifier.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Tulpep.NotificationWindow\PopupNotifierForm.cs">
+    <Compile Include="NotificationWindow\PopupNotifierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tulpep.NotificationWindow\Properties\Resources.Designer.cs">
+    <Compile Include="NotificationWindow\Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -69,9 +69,10 @@
     <EmbeddedResource Include="DirectoryMonitorForm.resx">
       <DependentUpon>DirectoryMonitorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tulpep.NotificationWindow\Properties\Resources.resx">
+    <EmbeddedResource Include="NotificationWindow\Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />

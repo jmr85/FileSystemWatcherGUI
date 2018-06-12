@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace FileSystemWatcherComponent.Tulpep.NotificationWindow
+namespace FileSystemWatcherComponent.NotificationWindow
 {
     internal class PopupNotifierForm : System.Windows.Forms.Form
     {

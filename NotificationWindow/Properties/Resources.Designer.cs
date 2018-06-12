@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FileSystemWatcherComponent.Tulpep.NotificationWindow.Properties {
+namespace FileSystemWatcherComponent.NotificationWindow.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace FileSystemWatcherComponent.Tulpep.NotificationWindow.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileSystemWatcherComponent.Tulpep.NotificationWindow.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileSystemWatcherComponent.NotificationWindow.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -59,18 +59,5 @@ namespace FileSystemWatcherComponent.Tulpep.NotificationWindow.Properties {
                 resourceCulture = value;
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-       // internal static System.Drawing.Bitmap Grip
-        //{
-          //  get
-           // {
-             //   object obj = ResourceManager.GetObject("Grip", resourceCulture);
-               // return ((System.Drawing.Bitmap)(obj));
-          //  }
-        //}
-
     }
 }
