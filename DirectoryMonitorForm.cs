@@ -154,12 +154,10 @@ namespace DirectoryMonitorWinForm
 			// cboFilter nadaas
 			// 
 			this.fileFilterList.Items.AddRange(new object[] {
-                                                            "*.*",
-                                                           ".apk",
-                                                           ".ipa",
-                                                           ".txt",
-														   ".doc",
-														   ".xls"});
+                                                           "*.apk",
+                                                           "*.ipa",
+                                                           "*.zip",
+														   "*.txt"});
 			this.fileFilterList.Location = new System.Drawing.Point(96, 112);
 			this.fileFilterList.Name = "fileFilterList";
 			this.fileFilterList.Size = new System.Drawing.Size(121, 21);
@@ -214,9 +212,9 @@ namespace DirectoryMonitorWinForm
             string originalname = e.OldFullPath;
 			string renamed = e.FullPath;
             
-            MessageBox.Show("File: "+originalname+" renamed to "+renamed + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.OldName+" Renamed");
+            //MessageBox.Show("File: "+originalname+" renamed to "+renamed + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.OldName+" Renamed");
 		}
-
+        
 		private void FileMonitor_Changed(object sender, System.IO.FileSystemEventArgs e)
 		{
             DateTime localDate = DateTime.Now;
@@ -227,11 +225,11 @@ namespace DirectoryMonitorWinForm
 			{
                 PopupNotifier popup = new PopupNotifier();
                 popup.TitleText = "There are new files";
-                popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt")+ " "+ e.Name + " Created";
+                popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
                 popup.Popup();
-                   
+
                 //MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Created" );
-			}
+            }
 			//else if(ChangeType=="Deleted")
 			//{
              //   MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Deleted");
@@ -242,7 +240,6 @@ namespace DirectoryMonitorWinForm
             //}
 		
 		}
-
 		private void ButtonStart_Click(object sender, System.EventArgs e)
 		{
     
@@ -250,6 +247,7 @@ namespace DirectoryMonitorWinForm
             {
                 if (Directory.Exists(directoryToMonitor.Text))
                 {
+                    
                     if (fileFilterList.SelectedText != "")
                     {
                         Filter = fileFilterList.SelectedText.ToString();
