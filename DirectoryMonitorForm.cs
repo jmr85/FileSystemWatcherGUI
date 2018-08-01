@@ -245,50 +245,53 @@ namespace DirectoryMonitorWinForm
 
 		private void ButtonStart_Click(object sender, System.EventArgs e)
 		{
-            
-            if (String.IsNullOrEmpty(directoryToMonitor.Text))
+    
+            if (!String.IsNullOrEmpty(directoryToMonitor.Text))
+            {
+                if (Directory.Exists(directoryToMonitor.Text))
+                {
+                    if (fileFilterList.SelectedText != "")
+                    {
+                        Filter = fileFilterList.SelectedText.ToString();
+                    }
+                    else
+                    {
+                        Filter = "*.*";
+                    }
+
+                    if (subdirectoriesAreIncluded.Checked == true)
+                    {
+                        IncludeSubs = true;
+                    }
+                    else
+                    {
+                        IncludeSubs = false;
+                    }
+                    //get the configuration properties from the form.
+                    Path = directoryToMonitor.Text;
+                    //Set the properties on the monitor.
+                    FileMonitor.Path = Path.ToString();
+                    FileMonitor.Filter = Filter.ToString();
+                    FileMonitor.IncludeSubdirectories = IncludeSubs;
+                    FileMonitor.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+                        | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+
+                    //Begin monitoring.
+                    FileMonitor.EnableRaisingEvents = true;
+                }
+                else
+                {
+                    // return required field message 
+                    MessageBox.Show("The directory is not found");
+                }
+               
+            }
+            else
             {
                 // return required field message 
                 MessageBox.Show("Please Enter a Directory");
             }
-           // if (directoryToMonitor.Text == "")
-			//{
-			//	MessageBox.Show("Please Enter a Directory");
-			//}
-			else
-			{
-				//get the configuration properties from the form.
-				Path = directoryToMonitor.Text;
-			}				
-			
-			if (fileFilterList.SelectedText != "")
-			{
-				Filter = fileFilterList.SelectedText.ToString();
-			}
-			else
-			{
-				Filter = "*.*";
-			}
-			
-			if (subdirectoriesAreIncluded.Checked == true)
-			{
-				IncludeSubs = true;
-			}
-			else
-			{
-				IncludeSubs = false;
-			}
-			
-			//Set the properties on the monitor.
-			FileMonitor.Path = Path.ToString();
-			FileMonitor.Filter = Filter.ToString();
-			FileMonitor.IncludeSubdirectories = IncludeSubs;
-			FileMonitor.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite 
-				| NotifyFilters.FileName | NotifyFilters.DirectoryName;
-			
-			//Begin monitoring.
-			FileMonitor.EnableRaisingEvents = true;
-	
+           
 		}
 
 		private void ButtonStop_Click(object sender, System.EventArgs e)
