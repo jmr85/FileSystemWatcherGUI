@@ -248,9 +248,9 @@ namespace DirectoryMonitorWinForm
                 if (Directory.Exists(directoryToMonitor.Text))
                 {
                     
-                    if (fileFilterList.SelectedText != "")
+                    if (fileFilterList.Text != "")
                     {
-                        Filter = fileFilterList.SelectedText.ToString();
+                        Filter = fileFilterList.Text;
                     }
                     else
                     {
