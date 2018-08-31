@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.IO;
 using FileSystemWatcherComponent.NotificationWindow;
 using System.Collections.Generic;
+using FileSystemWatcherComponent;
 
 namespace DirectoryMonitorWinForm
 {
@@ -216,7 +217,8 @@ namespace DirectoryMonitorWinForm
             //MessageBox.Show("File: "+originalname+" renamed to "+renamed + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.OldName+" Renamed");
 		}
         string outputStr = String.Empty;
-        List<string> MyListValues = new List<string>();
+        List<FileInfoJMR> MyListValues = new List<FileInfoJMR>();
+        FileInfoJMR fileInfo;
         private void FileMonitor_Changed(object sender, System.IO.FileSystemEventArgs e)
 		{
             DateTime localDate = DateTime.Now;
@@ -233,10 +235,15 @@ namespace DirectoryMonitorWinForm
             //display a message box for the appropriate changetype.
             if (ChangeType=="Created")
 			{
-                outputStr += "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
-                MyListValues.Add(outputStr);
+                fileInfo = new FileInfoJMR();
+                fileInfo.FullPath = e.FullPath;
+                fileInfo.ChangeType = e.ChangeType.ToString();
+                fileInfo.DTime = localDate;
 
-                print(MyListValues);
+                //outputStr += "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
+                MyListValues.Add(fileInfo);
+
+                ShowList(MyListValues);
 
                 //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
 
@@ -257,26 +264,39 @@ namespace DirectoryMonitorWinForm
 
         }
 
-        
-        public void print(List<String> listado)
+        PopupNotifier popup = new PopupNotifier();
+        private void ShowList(List<FileInfoJMR> listado)
         {
-            System.Collections.IList list = MyListValues;
-            for (int i = 0; i < list.Count; i++)
+
+           // System.Collections.IList list1 = listado;
+            //for (int i = 0; i < list1.Count; i++)
+           // {
+            //    List<FileInfoJMR> list = (List<FileInfoJMR>)list1[i];
+            //    MessageBox.Show(list.ToString());// Shows the message in each iteration
+           // }
+
+            string outputStr = String.Empty;
+            foreach (FileInfoJMR lista in listado)
             {
-                List<string> lista = (List<string>)list[i];
-                MessageBox.Show(lista.ToString());// Shows the message in each iteration
+                outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm tt");
             }
+            //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
+           
+            popup.TitleText = "There are new files";
+            popup.ContentText = outputStr;
+            popup.Popup();
+
         }
 
-        
 
-       // PopupNotifier popup = new PopupNotifier();
+
+        // PopupNotifier popup = new PopupNotifier();
         //popup.TitleText = "There are new files";
         //popup.ContentText = "xx";
         //popup.Popup();
 
 
-            //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
+        //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
         private void ButtonStart_Click(object sender, System.EventArgs e)
 		{
     
