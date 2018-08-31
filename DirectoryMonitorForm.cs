@@ -215,44 +215,69 @@ namespace DirectoryMonitorWinForm
             
             //MessageBox.Show("File: "+originalname+" renamed to "+renamed + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.OldName+" Renamed");
 		}
-        
-		private void FileMonitor_Changed(object sender, System.IO.FileSystemEventArgs e)
+        string outputStr = String.Empty;
+        List<string> MyListValues = new List<string>();
+        private void FileMonitor_Changed(object sender, System.IO.FileSystemEventArgs e)
 		{
             DateTime localDate = DateTime.Now;
             string ChangeType = e.ChangeType.ToString();
-            // crear objeta para pasar las propiedades de System.IO.FileSystemEventArgs + fecha
-            List<System.IO.FileSystemEventArgs> MyListValues = new List<System.IO.FileSystemEventArgs>();
-            //MyListValues.Add(new FileSystemEventArgs(FullPath: e.FullPath));
 
+            
+           
+            // crear objeta para pasar las propiedades de System.IO.FileSystemEventArgs + fecha
+            // objeto FileInfo con String filename; Path file; 
+            
+            
+            //MyListValues.Add(new FileSystemEventArgs(FullPath: e.FullPath));
+           
             //display a message box for the appropriate changetype.
             if (ChangeType=="Created")
 			{
-                string outputStr = String.Empty;
-                foreach (System.IO.FileSystemEventArgs fse in MyListValues)
-                {
-                    outputStr += "File: " + fse.FullPath + " " + fse.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
-                }
+                outputStr += "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
+                MyListValues.Add(outputStr);
+
+                print(MyListValues);
+
                 //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
 
-                PopupNotifier popup = new PopupNotifier();
-                popup.TitleText = "There are new files";
-                popup.ContentText = outputStr;
+        
                // popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
-                popup.Popup();
+               
 
                 //MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Created" );
             }
-			//else if(ChangeType=="Deleted")
-			//{
-             //   MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Deleted");
+            //else if(ChangeType=="Deleted")
+            //{
+            //   MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Deleted");
             //}
-			//else if(ChangeType=="Changed")
-			//{                
+            //else if(ChangeType=="Changed")
+            //{                
             //    MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Changed" + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"));
             //}
-		
-		}
-		private void ButtonStart_Click(object sender, System.EventArgs e)
+
+        }
+
+        
+        public void print(List<String> listado)
+        {
+            System.Collections.IList list = MyListValues;
+            for (int i = 0; i < list.Count; i++)
+            {
+                List<string> lista = (List<string>)list[i];
+                MessageBox.Show(lista.ToString());// Shows the message in each iteration
+            }
+        }
+
+        
+
+       // PopupNotifier popup = new PopupNotifier();
+        //popup.TitleText = "There are new files";
+        //popup.ContentText = "xx";
+        //popup.Popup();
+
+
+            //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
+        private void ButtonStart_Click(object sender, System.EventArgs e)
 		{
     
             if (!String.IsNullOrEmpty(directoryToMonitor.Text))
