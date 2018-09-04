@@ -70,6 +70,9 @@
     <EmbeddedResource Include="DirectoryMonitorForm.resx">
       <DependentUpon>DirectoryMonitorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NotificationWindow\PopupNotifierForm.resx">
+      <DependentUpon>PopupNotifierForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NotificationWindow\Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

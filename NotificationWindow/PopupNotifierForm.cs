@@ -115,12 +115,17 @@ namespace FileSystemWatcherComponent.NotificationWindow
         private void InitializeComponent()
         {
             this.SuspendLayout();
+            // 
+            // PopupNotifierForm
+            // 
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(392, 66);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PopupNotifierForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TopMost = true;
             this.ResumeLayout(false);
+
         }
 
         /// <summary>
