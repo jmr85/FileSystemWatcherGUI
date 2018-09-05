@@ -11,6 +11,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
+using DirectoryMonitorWinForm;
 
 namespace FileSystemWatcherComponent.NotificationWindow
 {
@@ -22,6 +23,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
     [DefaultEvent("Click")]
     class PopupNotifier : Component
     {
+        private DirectoryMonitorForm directoryMonitorForm;
         /// <summary>
         /// Event that is raised when the text in the notification window is clicked.
         /// </summary>
@@ -288,6 +290,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
 
             tmrWait = new Timer();
             tmrWait.Tick += new EventHandler(tmWait_Tick);
+            
         }
 
         /// <summary>
@@ -407,7 +410,13 @@ namespace FileSystemWatcherComponent.NotificationWindow
             if (Click != null)
             {
                 Click(this, EventArgs.Empty);
+                
             }
+            //string pepe = ContentText;
+            
+            System.Diagnostics.Process.Start(DirectoryMonitorForm.plugFullPath);
+            //System.Diagnostics.Process.Start(@"C:\juani");
+            MessageBox.Show("Click...");
         }
 
         /// <summary>

@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using FileSystemWatcherComponent.NotificationWindow;
+using System.Text.RegularExpressions;
 
 namespace DirectoryMonitorWinForm
 {
@@ -10,7 +11,7 @@ namespace DirectoryMonitorWinForm
     /// </summary>
     public class DirectoryMonitorForm : System.Windows.Forms.Form
 	{
- 
+        public static string plugFullPath;
 		private static string Path="";
 		private static string Filter="";
 		private static bool IncludeSubs=false;
@@ -31,7 +32,7 @@ namespace DirectoryMonitorWinForm
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public DirectoryMonitorForm()
+        public DirectoryMonitorForm()
 		{
 			//
 			// Required for Windows Form Designer support
@@ -223,6 +224,15 @@ namespace DirectoryMonitorWinForm
 			//display a message box for the appropriate changetype.
 			if (ChangeType=="Created")
 			{
+                //plugFullPath = e.FullPath;
+
+                Regex regex = new Regex(@"^[^.]+$");
+                Match match = regex.Match(directoryToMonitor.Text);
+                regex.IsMatch(directoryToMonitor.Text);
+                plugFullPath = directoryToMonitor.Text;
+               
+                
+
                 PopupNotifier popup = new PopupNotifier();
                 popup.TitleText = "There are new files";
                 popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
