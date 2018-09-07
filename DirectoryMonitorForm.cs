@@ -11,7 +11,7 @@ namespace DirectoryMonitorWinForm
     /// </summary>
     public class DirectoryMonitorForm : System.Windows.Forms.Form
 	{
-        public static string plugFullPath;
+        public static string filePlugFullPath;
 		private static string Path="";
 		private static string Filter="";
 		private static bool IncludeSubs=false;
@@ -229,7 +229,7 @@ namespace DirectoryMonitorWinForm
                 Regex regex = new Regex(@"^[^.]+$");
                 Match match = regex.Match(directoryToMonitor.Text);
                 regex.IsMatch(directoryToMonitor.Text);
-                plugFullPath = directoryToMonitor.Text;
+                filePlugFullPath = directoryToMonitor.Text;
                
                 
 

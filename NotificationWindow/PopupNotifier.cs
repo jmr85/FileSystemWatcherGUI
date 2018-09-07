@@ -414,7 +414,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
             }
             //string pepe = ContentText;
             
-            System.Diagnostics.Process.Start(DirectoryMonitorForm.plugFullPath);
+            System.Diagnostics.Process.Start(DirectoryMonitorForm.filePlugFullPath);
             //System.Diagnostics.Process.Start(@"C:\juani");
             MessageBox.Show("Click...");
         }
