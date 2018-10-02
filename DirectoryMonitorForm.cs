@@ -229,7 +229,7 @@ namespace DirectoryMonitorWinForm
                 Regex regex = new Regex(@"^[^.]+$");
                 Match match = regex.Match(directoryToMonitor.Text);
                 regex.IsMatch(directoryToMonitor.Text);
-                filePlugFullPath = directoryToMonitor.Text;
+                filePlugFullPath = e.FullPath;
                
                 
 

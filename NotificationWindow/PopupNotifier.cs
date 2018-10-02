@@ -12,6 +12,9 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
 using DirectoryMonitorWinForm;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace FileSystemWatcherComponent.NotificationWindow
 {
@@ -267,7 +270,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
             HeaderHeight = 10;
             ShowCloseButton = true;
             ShowOptionsButton = false;
-            Delay = 10000000;//estaba en 3000, para editar la duracion del popup
+            //Delay = 10000000;//estaba en 3000, para editar la duracion del popup
+            Delay = 2000;
             AnimationInterval = 10;
             AnimationDuration = 2000;// estaba en 1000 
             Size = new Size(400, 100);//estaba en 400, 200
@@ -412,11 +416,9 @@ namespace FileSystemWatcherComponent.NotificationWindow
                 Click(this, EventArgs.Empty);
                 
             }
-            //string pepe = ContentText;
-            
-            System.Diagnostics.Process.Start(DirectoryMonitorForm.filePlugFullPath);
-            //System.Diagnostics.Process.Start(@"C:\juani");
-            MessageBox.Show("Click...");
+        
+            System.Diagnostics.Process.Start(Path.GetDirectoryName(DirectoryMonitorForm.filePlugFullPath));
+
         }
 
         /// <summary>
@@ -514,7 +516,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
                         System.Diagnostics.Debug.WriteLine("Wait timer started.");
                     }
                 }
-                else
+                else if(this.CanRaiseEvents.Equals(Click))
                 {
                     frmPopup.Hide();
                 }
