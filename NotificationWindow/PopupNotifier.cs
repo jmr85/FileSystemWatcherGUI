@@ -11,6 +11,10 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
+using DirectoryMonitorWinForm;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace FileSystemWatcherComponent.NotificationWindow
 {
@@ -22,6 +26,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
     [DefaultEvent("Click")]
     class PopupNotifier : Component
     {
+        
         /// <summary>
         /// Event that is raised when the text in the notification window is clicked.
         /// </summary>
@@ -265,7 +270,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
             HeaderHeight = 10;
             ShowCloseButton = true;
             ShowOptionsButton = false;
-            Delay = 10000000;//estaba en 3000, para editar la duracion del popup
+            //Delay = 10000000;//estaba en 3000, para editar la duracion del popup
+            Delay = 3000;
             AnimationInterval = 10;
             AnimationDuration = 2000;// estaba en 1000 
             Size = new Size(400, 100);//estaba en 400, 200
@@ -287,7 +293,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
             tmrAnimation.Tick += new EventHandler(tmAnimation_Tick);
 
             tmrWait = new Timer();
-            tmrWait.Tick += new EventHandler(tmWait_Tick);
+            //tmrWait.Tick += new EventHandler(tmWait_Tick); //comentado para que no oculte el popup notification
+            
         }
 
         /// <summary>
@@ -344,7 +351,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
                         opacityStart = frmPopup.Opacity;
                         opacityStop = 1;
                         isAppearing = true;
-                        //realAnimationDuration = Math.Max(20, 1);
+                        realAnimationDuration = Math.Max(20, 1);
                         realAnimationDuration = Math.Max((int)sw.ElapsedMilliseconds, 1);
                         sw.Restart();
                         System.Diagnostics.Debug.WriteLine("Animation direction changed.");
@@ -406,8 +413,9 @@ namespace FileSystemWatcherComponent.NotificationWindow
         {
             if (Click != null)
             {
-                Click(this, EventArgs.Empty);
+                Click(this, EventArgs.Empty);               
             }
+            System.Diagnostics.Process.Start(Path.GetDirectoryName(DirectoryMonitorForm.filePlugFullPath));
         }
 
         /// <summary>
@@ -436,10 +444,10 @@ namespace FileSystemWatcherComponent.NotificationWindow
             {
                 if (Appear != null) Appear(this, EventArgs.Empty);
             }
-            else
-            {
+           else
+           {
                 if (Disappear != null) Disappear(this, EventArgs.Empty);
-            }
+           }
         }
 
         /// <summary>
@@ -473,7 +481,6 @@ namespace FileSystemWatcherComponent.NotificationWindow
             // animation has ended
             if (elapsed > realAnimationDuration)
             {
-
                 sw.Reset();
                 tmrAnimation.Stop();
                 System.Diagnostics.Debug.WriteLine("Animation stopped.");
@@ -505,27 +512,28 @@ namespace FileSystemWatcherComponent.NotificationWindow
                         System.Diagnostics.Debug.WriteLine("Wait timer started.");
                     }
                 }
-                else
+                else if (this.CanRaiseEvents.Equals(Click))
                 {
                     frmPopup.Hide();
                 }
             }
         }
-
+        // tmWait_Tick comentado para que no oculte el popup notification cuando el tiempo de espera ha transcurrido
+        // tmWait_Tick disabled so it does not hide the popup notification
         /// <summary>
         /// The wait timer has elapsed, start the animation to hide the window.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tmWait_Tick(object sender, EventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Wait timer elapsed.");
-            tmrWait.Stop();
-            tmrAnimation.Interval = AnimationInterval;
-            tmrAnimation.Start();
-            sw.Restart();
-            System.Diagnostics.Debug.WriteLine("Animation started.");
-        }
+        // private void tmWait_Tick(object sender, EventArgs e)
+        // {
+        // System.Diagnostics.Debug.WriteLine("Wait timer elapsed.");
+        //  tmrWait.Stop();
+        //  tmrAnimation.Interval = AnimationInterval;
+        //  tmrAnimation.Start();
+        //  sw.Restart();
+        //System.Diagnostics.Debug.WriteLine("Animation started.");
+        //}
 
         /// <summary>
         /// Start wait timer if the mouse leaves the form.

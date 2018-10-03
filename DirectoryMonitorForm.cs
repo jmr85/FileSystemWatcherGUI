@@ -12,7 +12,7 @@ namespace DirectoryMonitorWinForm
     /// </summary>
     public class DirectoryMonitorForm : System.Windows.Forms.Form
 	{
- 
+        public static string filePlugFullPath;
 		private static string Path="";
 		private static string Filter="";
 		private static bool IncludeSubs=false;
@@ -33,7 +33,7 @@ namespace DirectoryMonitorWinForm
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public DirectoryMonitorForm()
+        public DirectoryMonitorForm()
 		{
 			//
 			// Required for Windows Form Designer support
