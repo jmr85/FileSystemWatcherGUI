@@ -235,6 +235,8 @@ namespace DirectoryMonitorWinForm
             //display a message box for the appropriate changetype.
             if (ChangeType=="Created")
 			{
+                filePlugFullPath = e.FullPath;
+
                 fileInfo = new FileInfoJMR();
                 fileInfo.FullPath = e.FullPath;
                 fileInfo.ChangeType = e.ChangeType.ToString();

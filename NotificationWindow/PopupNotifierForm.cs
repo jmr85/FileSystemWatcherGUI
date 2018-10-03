@@ -64,6 +64,9 @@ namespace FileSystemWatcherComponent.NotificationWindow
         private Rectangle rcBody;
         private Rectangle rcHeader;
         private Rectangle rcForm;
+
+        private Rectangle rcScroll;
+
         private LinearGradientBrush brushBody;
         private LinearGradientBrush brushHeader;
         private Brush brushButtonHover;
@@ -74,6 +77,11 @@ namespace FileSystemWatcherComponent.NotificationWindow
         private Brush brushLinkHover;
         private Brush brushContent;
         private Brush brushTitle;
+
+        //scroll by jmruiz
+        private ScrollBar scrollBar;
+
+        
 
         #endregion
 
@@ -290,6 +298,10 @@ namespace FileSystemWatcherComponent.NotificationWindow
             rcHeader = new Rectangle(0, 0, this.Width, Parent.HeaderHeight);
             rcForm = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 
+            rcScroll = new Rectangle(0, 0, this.Width, this.Height);
+
+            scrollBar = new VScrollBar();
+
             brushBody = new LinearGradientBrush(rcBody, Parent.BodyColor, GetLighterColor(Parent.BodyColor), LinearGradientMode.Vertical);
             brushHeader = new LinearGradientBrush(rcHeader, Parent.HeaderColor, GetDarkerColor(Parent.HeaderColor), LinearGradientMode.Vertical);
             brushButtonHover = new SolidBrush(Parent.ButtonHoverColor);
@@ -321,6 +333,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
                 brushLinkHover.Dispose();
                 brushContent.Dispose();
                 brushTitle.Dispose();
+
+                scrollBar.Dispose();
             }
         }
 
@@ -340,6 +354,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
             e.Graphics.FillRectangle(brushBody, rcBody);
             e.Graphics.FillRectangle(brushHeader, rcHeader);
             e.Graphics.DrawRectangle(penBorder, rcForm);
+
            // if (Parent.ShowGrip)
           //  {
             //    e.Graphics.DrawImage(Properties.Resources.Grip, (int)((this.Width - Properties.Resources.Grip.Width) / 2), (int)((Parent.HeaderHeight - 3) / 2));
