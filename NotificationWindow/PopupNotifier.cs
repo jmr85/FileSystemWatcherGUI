@@ -519,6 +519,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
             }
         }
         // tmWait_Tick comentado para que no oculte el popup notification cuando el tiempo de espera ha transcurrido
+        // tmWait_Tick disabled so it does not hide the popup notification
         /// <summary>
         /// The wait timer has elapsed, start the animation to hide the window.
         /// </summary>
