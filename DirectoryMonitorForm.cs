@@ -224,15 +224,9 @@ namespace DirectoryMonitorWinForm
 			//display a message box for the appropriate changetype.
 			if (ChangeType=="Created")
 			{
-                //plugFullPath = e.FullPath;
-
-                Regex regex = new Regex(@"^[^.]+$");
-                Match match = regex.Match(directoryToMonitor.Text);
-                regex.IsMatch(directoryToMonitor.Text);
+              
                 filePlugFullPath = e.FullPath;
-               
-                
-
+              
                 PopupNotifier popup = new PopupNotifier();
                 popup.TitleText = "There are new files";
                 popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
