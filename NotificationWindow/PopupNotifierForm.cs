@@ -326,6 +326,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
         /// <param name="e"></param>
         private void PopupNotifierForm_Paint(object sender, PaintEventArgs e)
         {
+            // aca podria ir el scroll
+
             if (!gdiInitialized)
             {
                 AllocateGDIObjects();
