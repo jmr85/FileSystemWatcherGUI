@@ -65,7 +65,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
         private Rectangle rcHeader;
         private Rectangle rcForm;
 
-        private Rectangle rcScroll;
+       
 
         private LinearGradientBrush brushBody;
         private LinearGradientBrush brushHeader;
@@ -134,6 +134,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TopMost = true;
             this.ResumeLayout(false);
+            
 
         }
 
@@ -215,7 +216,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
         /// </summary>
         private Rectangle RectClose
         {
-            get { return new Rectangle(this.Width - 5 - 16, Parent.HeaderHeight + 3, 16, 16); }
+            //get { return new Rectangle(this.Width - 5 - 16, Parent.HeaderHeight + 3, 16, 16); }
+            get { return new Rectangle(this.Width - 20 - 16, Parent.HeaderHeight + 3, 16, 16); }
         }
 
         /// <summary>
@@ -298,8 +300,6 @@ namespace FileSystemWatcherComponent.NotificationWindow
             rcHeader = new Rectangle(0, 0, this.Width, Parent.HeaderHeight);
             rcForm = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 
-            rcScroll = new Rectangle(0, 0, this.Width, this.Height);
-
             scrollBar = new VScrollBar();
 
             brushBody = new LinearGradientBrush(rcBody, Parent.BodyColor, GetLighterColor(Parent.BodyColor), LinearGradientMode.Vertical);
@@ -355,10 +355,23 @@ namespace FileSystemWatcherComponent.NotificationWindow
             e.Graphics.FillRectangle(brushHeader, rcHeader);
             e.Graphics.DrawRectangle(penBorder, rcForm);
 
-           // if (Parent.ShowGrip)
-          //  {
+            // if (Parent.ShowGrip)
+            //  {
             //    e.Graphics.DrawImage(Properties.Resources.Grip, (int)((this.Width - Properties.Resources.Grip.Width) / 2), (int)((Parent.HeaderHeight - 3) / 2));
-           // }
+            // }
+            if (Parent.Scroll)
+            {
+                scrollBar.Dock = DockStyle.Right;
+                scrollBar.Width = 20;
+
+                Controls.Add(scrollBar);
+
+                //scrollBar.Scroll + = new System.Windows.Forms.ScrollEventHandler(scrollBar_scroll);
+                //public void scrollBar_scroll(object sender, ScrollEventArgs e)
+                //{
+                //    Parent.ContentText.Length > 20;
+                //}
+            }
             if (Parent.ShowCloseButton)
             {
                 if (mouseOnClose)
