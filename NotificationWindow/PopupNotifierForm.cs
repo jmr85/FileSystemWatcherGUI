@@ -127,7 +127,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
             // 
             // PopupNotifierForm
             // 
-            //this.AutoScroll = true;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(392, 66);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PopupNotifierForm";
@@ -360,9 +360,18 @@ namespace FileSystemWatcherComponent.NotificationWindow
             if (Parent.Scroll)
             {
                 scrollBar.Dock = DockStyle.Right;
-               // scrollBar.Width = 20;
+                //scrollBar.Width = 20;
 
-                this.AutoScrollMinSize = new Size(400, 400);
+                //this.AutoScrollMinSize = new Size(800, 800);
+
+                if (Parent.ContentText == null) this.AutoScrollMinSize = new Size(0, 0);
+                else
+                {               
+                    this.AutoScrollMinSize = new Size(400, 400); 
+                }
+                
+
+                e.Graphics.TranslateTransform(this.AutoScrollPosition.X, this.AutoScrollPosition.Y);
 
                 Controls.Add(scrollBar);
 
