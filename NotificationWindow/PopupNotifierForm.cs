@@ -79,7 +79,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
         private Brush brushTitle;
 
         //scroll by jmruiz
-        private ScrollBar scrollBar;
+        private VScrollBar scrollBar;
 
         
 
@@ -200,6 +200,14 @@ namespace FileSystemWatcherComponent.NotificationWindow
                         this.Width - Parent.ImagePadding.Left - Parent.ImageSize.Width - Parent.ImagePadding.Right - Parent.ContentPadding.Left - Parent.ContentPadding.Right - 16 - 5,
                         this.Height - Parent.HeaderHeight - Parent.TitlePadding.Top - heightOfTitle - Parent.TitlePadding.Bottom - Parent.ContentPadding.Top - Parent.ContentPadding.Bottom - 1);
                 }
+                //else if (Parent.Scroll != false)
+                //{
+                //    return new RectangleF(
+                //        Parent.ContentPadding.Left,
+                //        Parent.HeaderHeight + Parent.TitlePadding.Top + heightOfTitle + Parent.TitlePadding.Bottom + Parent.ContentPadding.Top,
+                //        this.Width - Parent.ContentPadding.Left - Parent.ContentPadding.Right - 16 - 5,
+                //        this.Height - Parent.HeaderHeight - Parent.TitlePadding.Top - heightOfTitle - Parent.TitlePadding.Bottom - Parent.ContentPadding.Top - Parent.ContentPadding.Bottom - 1);
+                //}
                 else
                 {
                     return new RectangleF(
@@ -360,14 +368,17 @@ namespace FileSystemWatcherComponent.NotificationWindow
             if (Parent.Scroll)
             {
                 scrollBar.Dock = DockStyle.Right;
-                //scrollBar.Width = 20;
+                //scrollBar.Height -= Parent.HeaderHeight;
 
                 //this.AutoScrollMinSize = new Size(800, 800);
+
+               // scrollBar.AutoSize = true;
+
 
                 if (Parent.ContentText == null) this.AutoScrollMinSize = new Size(0, 0);
                 else
                 {               
-                    this.AutoScrollMinSize = new Size(400, 400); 
+                    this.AutoScrollMinSize = new Size(rcForm.Width, rcForm.Height - Parent.HeaderHeight); //-Parent.HeaderHeight
                 }
                 
 
