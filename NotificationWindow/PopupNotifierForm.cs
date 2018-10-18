@@ -386,11 +386,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
 
                 Controls.Add(scrollBar);
 
-                //scrollBar.Scroll + = new System.Windows.Forms.ScrollEventHandler(scrollBar_scroll);
-                //public void scrollBar_scroll(object sender, ScrollEventArgs e)
-                //{
-                //    Parent.ContentText.Length > 20;
-                //}
+               // scrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(scrollBar_scroll);
+                
             }
             if (Parent.ShowCloseButton)
             {
@@ -452,6 +449,14 @@ namespace FileSystemWatcherComponent.NotificationWindow
                 e.Graphics.DrawString(Parent.ContentText, Parent.ContentFont, brushText, RectContentText);
             }
         }
+        //private void scrollBar_scroll(object sender, ScrollEventArgs e)
+        //{
+        //    e.Graphics.FillRectangle(brushButtonHover, RectOptions);
+        //    e.Graphics.DrawRectangle(penButtonBorder, RectOptions);
+        //    Graphics g = pictureBox1.CreateGraphics();
+        //    g.DrawImage(pictureBox1.Image, newRectangle(0, 0, pictureBox1.Height, scrollBar.Value));
+        //    //Parent.ContentText.Length > 20;
+        //}
 
         /// <summary>
         /// Dispose GDI objects.
