@@ -33,7 +33,12 @@
     <RootNamespace>FileSystemWatcherComponent</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Data\LiteDB_DLL\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,12 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="Data\LiteDB_DLL\LiteDB.dll" />
     <Content Include="Misc\NoFiles.txt" />
     <Content Include="NotificationWindow\Grip.png" />
     <Content Include="NotificationWindow\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Data\FileExtensionDAO.cs" />
+    <Compile Include="Data\FileExtensionDTO.cs" />
+    <Compile Include="Data\FilePathDAO.cs" />
+    <Compile Include="Data\FilePathDTO.cs" />
     <Compile Include="DirectoryMonitorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +84,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
