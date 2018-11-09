@@ -53,6 +53,7 @@
     <Compile Include="DirectoryMonitorForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FileWatcherSettings.cs" />
     <Compile Include="NotificationWindow\PopupNotifier.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -64,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PropertieDAO.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

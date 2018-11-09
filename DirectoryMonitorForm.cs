@@ -2,9 +2,9 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using FileSystemWatcherComponent.NotificationWindow;
-using System.Text.RegularExpressions;
 using FileSystemWatcherComponent.Properties;
-using System.Linq;
+using FileSystemWatcherComponent;
+
 
 namespace DirectoryMonitorWinForm
 {
@@ -27,6 +27,8 @@ namespace DirectoryMonitorWinForm
 		private System.Windows.Forms.Label Label4;
 		private System.Windows.Forms.ComboBox fileFilterList;
 		private System.Windows.Forms.CheckBox subdirectoriesAreIncluded;
+
+        private FileWatcherSettings fwSettings1;
 		
 		
 		/// <summary>
@@ -125,8 +127,8 @@ namespace DirectoryMonitorWinForm
             this.directoryToMonitor.Name = "directoryToMonitor";
             this.directoryToMonitor.Size = new System.Drawing.Size(312, 20);
             this.directoryToMonitor.TabIndex = 3;
-            this.directoryToMonitor.Text = Settings.Default.path[0];
-
+            //this.directoryToMonitor.Text = Settings.Default.path[0];
+            directoryToMonitor.Text = fwSettings1.Path[0];
             // 
             // Label2
             // 
@@ -157,10 +159,9 @@ namespace DirectoryMonitorWinForm
             // 
             // fileFilterList
             // 
-
-            object [] arrayListFiles = (object[]) Settings.Default.file.Cast<object>().ToArray();
-
-            this.fileFilterList.Items.AddRange(arrayListFiles);
+           // Data data = new Data();
+            //DataBindings.Add(new Binding("listFile", data, "data.ListAllFile"));
+            this.fileFilterList.Items.AddRange(PropertieDAO.ListAllFile());
             this.fileFilterList.Location = new System.Drawing.Point(96, 112);
             this.fileFilterList.Name = "fileFilterList";
             this.fileFilterList.Size = new System.Drawing.Size(121, 21);
@@ -195,13 +196,30 @@ namespace DirectoryMonitorWinForm
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+            // 
+            // FileWatcherSettings
+            // 
+            this.fwSettings1 = new FileWatcherSettings();
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
+            Binding bndPath = new Binding("Text", fwSettings1,
+            "FileWatcherSettings.Path", true, DataSourceUpdateMode.OnPropertyChanged);
+             this.directoryToMonitor.DataBindings.Add(bndPath);
+
+        Binding bndFile = new Binding("Text", fwSettings1,
+            "FileWatcherSettings.File", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.DataBindings.Add(bndFile);
+            
+            Binding bndSubdirectory = new Binding("Checked", fwSettings1,
+            "FileWatcherSettings.Subdirectory", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.subdirectoriesAreIncluded.DataBindings.Add(bndSubdirectory); 
+
+        }
+        #endregion
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
 		static void Main() 
 		{
 			Application.Run(new DirectoryMonitorForm());
@@ -228,10 +246,12 @@ namespace DirectoryMonitorWinForm
 			{
               
                 filePlugFullPath = e.FullPath;
-              
-                PopupNotifier popup = new PopupNotifier();
-                popup.TitleText = "There are new files";
-                popup.ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
+
+                PopupNotifier popup = new PopupNotifier
+                {
+                    TitleText = "There are new files",
+                    ContentText = "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt")
+                };
                 popup.Popup();
 
                 //MessageBox.Show("File: " +  e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm:ss tt"), e.Name+" Created" );
