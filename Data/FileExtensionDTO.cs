@@ -7,6 +7,7 @@ namespace FileSystemWatcherComponent.Data
 {
     class FileExtensionDTO
     {
+        public int Id { get; set; }
         public string File { get; set; }
     }
 }
