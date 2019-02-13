@@ -146,6 +146,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
 
         private Size imageSize = new Size(0, 0);
 
+        public bool didClick { get; set; } = false; 
+
         [Category("Image")]
         [Description("Icon image to display.")]
         public Image Image { get; set; }
@@ -427,6 +429,7 @@ namespace FileSystemWatcherComponent.NotificationWindow
         private void frmPopup_CloseClick(object sender, EventArgs e)
         {
             Hide();
+            didClick = true;
             if (Close != null)
             {
                 Close(this, EventArgs.Empty);

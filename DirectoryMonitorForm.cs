@@ -245,6 +245,8 @@ namespace DirectoryMonitorWinForm
                 //outputStr += "File: " + e.FullPath + " " + e.ChangeType + " " + localDate.ToString("dd/MM/yyyy hh:mm tt");
                 MyListValues.Add(fileInfo);
 
+                
+
                 ShowList(MyListValues);
 
                 //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
@@ -269,24 +271,47 @@ namespace DirectoryMonitorWinForm
         PopupNotifier popup = new PopupNotifier();
         private void ShowList(List<FileInfoJMR> listado)
         {
-
-           // System.Collections.IList list1 = listado;
+            // System.Collections.IList list1 = listado;
             //for (int i = 0; i < list1.Count; i++)
-           // {
+            // {
             //    List<FileInfoJMR> list = (List<FileInfoJMR>)list1[i];
             //    MessageBox.Show(list.ToString());// Shows the message in each iteration
-           // }
-
+            // }
+            int i = 0;    
             string outputStr = String.Empty;
             foreach (FileInfoJMR lista in listado)
             {
-                outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm tt");
+                // no me aparezca en el popup, al momento de executar, archivos nuevos no mas viejos de 1 min.
+                DateTime localDate = DateTime.Now;
+                localDate.AddMinutes(-10); // resto 1 minuto
+
+                if(i == 0)
+                {
+                    lista.DTime.ToString("dd/MM/yyyy hh:mm tt");
+                    outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm tt")+"\n";
+                }
+                ++i;
+                //outputStr = "";
+                if (lista.DTime <= localDate)
+                {
+                    outputStr = "";
+                }
+                lista.DTime.ToString("dd/MM/yyyy hh:mm tt");
+                outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm tt")+"\n";
             }
             //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
            
             popup.TitleText = "There are new files";
+
+            //if ()
+            //{
+            //   popup.ContentText = "";
+            // }
+            // DateTime dateTime = new DateTime();
+            //dateTime.Now
+    
             popup.ContentText = outputStr;
-            popup.Popup();
+            popup.Popup();          
 
         }
 

@@ -365,8 +365,8 @@ namespace FileSystemWatcherComponent.NotificationWindow
             //  {
             //    e.Graphics.DrawImage(Properties.Resources.Grip, (int)((this.Width - Properties.Resources.Grip.Width) / 2), (int)((Parent.HeaderHeight - 3) / 2));
             // }
-            if (Parent.Scroll)
-            {
+           // if (Parent.Scroll)
+           // {
                 scrollBar.Dock = DockStyle.Right;
                 //scrollBar.Height -= Parent.HeaderHeight;
 
@@ -388,13 +388,14 @@ namespace FileSystemWatcherComponent.NotificationWindow
 
                // scrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(scrollBar_scroll);
                 
-            }
+           // }
             if (Parent.ShowCloseButton)
             {
                 if (mouseOnClose)
                 {
                     e.Graphics.FillRectangle(brushButtonHover, RectClose);
                     e.Graphics.DrawRectangle(penButtonBorder, RectClose);
+                    
                 }
                 e.Graphics.DrawLine(penContent, RectClose.Left + 4, RectClose.Top + 4, RectClose.Right - 4, RectClose.Bottom - 4);
                 e.Graphics.DrawLine(penContent, RectClose.Left + 4, RectClose.Bottom - 4, RectClose.Right - 4, RectClose.Top + 4);
