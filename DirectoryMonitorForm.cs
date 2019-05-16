@@ -288,7 +288,7 @@ namespace DirectoryMonitorWinForm
                 if(i == 0)
                 {
                     lista.DTime.ToString("dd/MM/yyyy hh:mm tt");
-                    outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm tt")+"\n";
+                    outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm:ss tt")+"\n";
                 }
                 ++i;
                 //outputStr = "";
@@ -297,7 +297,7 @@ namespace DirectoryMonitorWinForm
                     outputStr = "";
                 }
                 lista.DTime.ToString("dd/MM/yyyy hh:mm tt");
-                outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm tt")+"\n";
+                outputStr += "File: " + lista.FullPath + " " + lista.ChangeType + " " + lista.DTime.ToString("dd/MM/yyyy hh:mm:ss tt")+"\n";
             }
             //MessageBox.Show(outputStr);// Shows the details of all students in a single Message
            
