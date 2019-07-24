@@ -3,4 +3,5 @@ The FileSystemWatcher Class monitors the file system and raises events whenever 
 
 For example, each time a new file has been created, the event triggers a popup with the description of the file and the date.
 
+![monitor](https://github.com/jmr85/FileSystemWatcherGUI/blob/master/monitor.png) 
 ![watcher](https://github.com/jmr85/FileSystemWatcherGUI/blob/master/watcher.png)
